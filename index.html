@@ -20,19 +20,20 @@
   }
 
   .message {
-    font-size: 1.5em;
+    font-size: 1.8em;
     max-width: 90%;
-    background: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.8);
     border-radius: 15px;
-    padding: 15px;
-    margin: 10px auto;
+    padding: 25px 20px;
+    margin: 0 auto;
     opacity: 0;
     transition: opacity 1s;
   }
 
   .buttons {
     display: none;
-    margin-top: 20px;
+    margin-top: 25px;
+    position: relative;
   }
 
   button {
@@ -40,11 +41,12 @@
     color: white;
     border: none;
     border-radius: 10px;
-    padding: 15px 25px;
-    font-size: 1.2em;
+    padding: 15px 30px;
+    font-size: 1.3em;
     margin: 10px;
     cursor: pointer;
     transition: transform 0.2s;
+    position: relative;
   }
 
   button:hover {
@@ -91,57 +93,8 @@
 </head>
 <body>
 
-<div id="messages">
-  <div class="message">Hey Sejal ❤️</div>
-  <div class="message">I never knew someone could make life this sweet…</div>
-  <div class="message">Being with you feels like home, like I finally belong somewhere.</div>
-  <div class="message">Every little thing you do… I notice it, I love it, and it makes me fall for you even more.</div>
-  <div class="message">I just wanted to say… thank you for being you, for making me happy, and for being my favorite human ❤️</div>
-  <div class="message">Will you be my Valentine? 🥰</div>
-</div>
+<div id="messageContainer" class="message">Hey Sejal ❤️</div>
 
 <div class="buttons" id="buttons">
   <button onclick="sayYes()">YES ❤️</button>
-  <button onclick="sayNo()">NO 😢</button>
-</div>
-
-<div class="hearts" id="hearts"></div>
-
-<script>
-  // Floating hearts
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.style.left = Math.random() * window.innerWidth + 'px';
-    heart.style.animationDuration = 2 + Math.random() * 3 + 's';
-    document.getElementById('hearts').appendChild(heart);
-    setTimeout(() => heart.remove(), 5000);
-  }
-  setInterval(createHeart, 500);
-
-  // Show messages line by line
-  const messages = document.querySelectorAll('.message');
-  let index = 0;
-  function showNextMessage() {
-    if(index < messages.length){
-      messages[index].style.opacity = 1;
-      index++;
-      setTimeout(showNextMessage, 2500); // 2.5 sec per line
-    } else {
-      document.getElementById('buttons').style.display = 'block'; // show YES/NO buttons
-    }
-  }
-  showNextMessage();
-
-  // Button actions
-  function sayYes() {
-    alert("Yay! ❤️ I'm so happy! Can't wait to be your Valentine! 🥰");
-  }
-
-  function sayNo() {
-    alert("Oh no! 😢 I'll still love you anyway ❤️");
-  }
-</script>
-
-</body>
-</html>
+  <button id="noBtn">NO 😢</butt
