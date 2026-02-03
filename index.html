@@ -1,80 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sejal, My Valentine ❤️</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ffe6e6, #ffb3cc);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      color: #b30059;
-      text-align: center;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sejal, My Valentine ❤️</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ffe6e6, #ffb3cc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    color: #b30059;
+    text-align: center;
+  }
 
-    .message {
-      font-size: 1.5em;
-      max-width: 90%;
-      background: rgba(255,255,255,0.7);
-      border-radius: 15px;
-      padding: 20px;
-      margin: 10px auto;
-      opacity: 0;
-      transition: opacity 1s;
-    }
+  .message {
+    font-size: 1.5em;
+    max-width: 90%;
+    background: rgba(255,255,255,0.7);
+    border-radius: 15px;
+    padding: 15px;
+    margin: 10px auto;
+    opacity: 0;
+    transition: opacity 1s;
+  }
 
-    .hearts {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-    }
+  .buttons {
+    display: none;
+    margin-top: 20px;
+  }
 
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: #ff4d94;
-      transform: rotate(-45deg);
-      animation: float 4s linear infinite;
-      border-radius: 5px 5px 0 0;
-    }
+  button {
+    background-color: #ff4d94;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 25px;
+    font-size: 1.2em;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
 
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: #ff4d94;
-      border-radius: 50%;
-    }
+  button:hover {
+    transform: scale(1.1);
+  }
 
-    .heart::before { top: -10px; left: 0; }
-    .heart::after { left: 10px; top: 0; }
+  .hearts {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
 
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(-45deg); opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(-45deg); opacity: 0; }
-    }
-  </style>
+  .heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ff4d94;
+    transform: rotate(-45deg);
+    animation: float 4s linear infinite;
+    border-radius: 5px 5px 0 0;
+  }
+
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #ff4d94;
+    border-radius: 50%;
+  }
+
+  .heart::before { top: -10px; left: 0; }
+  .heart::after { left: 10px; top: 0; }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(-45deg); opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(-45deg); opacity: 0; }
+  }
+</style>
 </head>
 <body>
 
 <div id="messages">
   <div class="message">Hey Sejal ❤️</div>
-  <div class="message">I never knew someone could make life this sweet… until I met you.</div>
-  <div class="message">Being with you feels like home, like I finally belong somewhere, and that’s in your heart.</div>
+  <div class="message">I never knew someone could make life this sweet…</div>
+  <div class="message">Being with you feels like home, like I finally belong somewhere.</div>
   <div class="message">Every little thing you do… I notice it, I love it, and it makes me fall for you even more.</div>
-  <div class="message">I just wanted to say… thank you for being you, for making me happy, and for being my favorite human ❤️<br>Will you be my Valentine? 🥰</div>
+  <div class="message">I just wanted to say… thank you for being you, for making me happy, and for being my favorite human ❤️</div>
+  <div class="message">Will you be my Valentine? 🥰</div>
+</div>
+
+<div class="buttons" id="buttons">
+  <button onclick="sayYes()">YES ❤️</button>
+  <button onclick="sayNo()">NO 😢</button>
 </div>
 
 <div class="hearts" id="hearts"></div>
@@ -91,17 +119,28 @@
   }
   setInterval(createHeart, 500);
 
-  // Show messages one by one
+  // Show messages line by line
   const messages = document.querySelectorAll('.message');
   let index = 0;
   function showNextMessage() {
     if(index < messages.length){
       messages[index].style.opacity = 1;
       index++;
-      setTimeout(showNextMessage, 3000);
+      setTimeout(showNextMessage, 2500); // 2.5 sec per line
+    } else {
+      document.getElementById('buttons').style.display = 'block'; // show YES/NO buttons
     }
   }
   showNextMessage();
+
+  // Button actions
+  function sayYes() {
+    alert("Yay! ❤️ I'm so happy! Can't wait to be your Valentine! 🥰");
+  }
+
+  function sayNo() {
+    alert("Oh no! 😢 I'll still love you anyway ❤️");
+  }
 </script>
 
 </body>
